@@ -10,7 +10,6 @@ $('#sizePicker').submit(function(e){
 });
 
 function makeGrid() {
-  choosenColor = $('#colorPicker').val(); // Get the choosen color
   gridHeight = $('#input_height').val(); // Get the grid height
   gridWidth = $('#input_width').val(); // Get the grid width
   var table = $('#pixel_canvas');
@@ -23,12 +22,12 @@ function createTable(table, height, width){
     var tr = $('<tr></tr>'); // Create the rows
     table.append(tr);
     for (var j = 0; j < width; j++) {
-      tr.append('<td></td>'); // Create the td inside the rows
+      var td = $('<td></td>');
+      td.on("click", function(){ // Add event Listener to created td
+        choosenColor = $('#colorPicker').val();
+        $(this).css('background-color', choosenColor);
+      })
+      tr.append(td); // Create the td inside the rows
     }
   }
-
-  // Event Listener for td, if it gets clicked, change the color
-  $( "td" ).click(function() {
-    $(this).css('background-color', choosenColor);
-  });
 }
